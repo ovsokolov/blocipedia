@@ -1,0 +1,53 @@
+<!--
+<h1>Welcome#index</h1>
+<p>Find me in app/views/welcome/index.html.erb</p>
+<%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
+<button type="button" onclick="signUp();">Sign Up</button>
+<input type="text" id="premium_plan"/>
+-->
+<div class="site-wrapper">
+  <div class="site-wrapper-inner">
+    <div class="cover-container">
+      <div class="masthead clearfix">
+        <div class="inner">
+          <h3 class="masthead-brand">Blocipedia</h3>
+          <nav class="nav nav-masthead">
+            <% if user_signed_in? %>
+              <%= current_user.name %> - <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: "nav-link"  %>
+            <% else %>
+              <%= link_to 'Sign In', new_user_session_path, method: :get, class: "nav-link"  %>
+            <% end %>
+          </nav>
+        </div>
+      </div>
+      <div class="inner cover">
+        <h1 class="cover-heading">Blocipedia: Social, Markdown Wikis</h1>
+        <p class="lead">Create and share Markdown Wikis</p>
+        <p class="lead">
+          <button type="button" onclick="signUp();" class="btn btn-lg btn-secondary">Sign Up</button>
+        </p>
+        <div class="row">
+          <div class="col-md-2">&nbsp;</div>
+          <div class="col-md-3">Create as many public wikis as you want!</div>
+          <div class="col-md-2">&nbsp;</div>
+          <div class="col-md-3">Create private wikis!</div>
+          <div class="col-md-2">&nbsp;</div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">&nbsp;</div>
+          <div class="col-md-3"><input type="checkbox" id="free_plan" value=""></div>
+          <div class="col-md-2">&nbsp;</div>
+          <div class="col-md-3"><input type="checkbox" id="premium_plan" value=""></div>
+          <div class="col-md-2">&nbsp;</div>
+        </div>
+        <div class="row">
+          <div class="col-md-2">&nbsp;</div>
+          <div class="col-md-3">Free Plan</div>
+          <div class="col-md-2">&nbsp;</div>
+          <div class="col-md-3">Premium plan</div>
+          <div class="col-md-2">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
