@@ -1,0 +1,5 @@
+<h1>Editing Wiki</h1>
+
+<%= render 'form', wiki: @wiki %>
+
+<%= link_to 'Destroy', @wiki, method: :delete, data: { confirm: 'Are you sure? you want to delete' }, class: 'btn btn-danger'  %>
