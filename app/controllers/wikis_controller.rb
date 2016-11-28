@@ -41,6 +41,7 @@ class WikisController < ApplicationController
   # PATCH/PUT /wikis/1
   # PATCH/PUT /wikis/1.json
   def update
+    authorize @wiki
     respond_to do |format|
       if @wiki.update(wiki_params)
         flash[:notice] = "Wiki was successfully updated."
@@ -55,6 +56,7 @@ class WikisController < ApplicationController
   # DELETE /wikis/1
   # DELETE /wikis/1.json
   def destroy
+    authorize @wiki
     @wiki.destroy
     respond_to do |format|
       flash[:notice] = "Wiki was successfully deleted."
