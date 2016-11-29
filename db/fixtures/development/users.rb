@@ -4,7 +4,7 @@ require 'random_data'
   user = User.new(
       :email                 => "admin#{count}@xxxxx.xxx",
       :name                  => RandomData.random_name,
-      :premium_plan          => false,
+      :premium_plan          => 0,
       :password              => "123456",
       :password_confirmation => "123456"
   )
