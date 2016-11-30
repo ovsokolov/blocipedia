@@ -40,10 +40,14 @@
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "off" %>
   </div>
-
+  <div class="action">
+    <button type="button" onclick="checkPlanSwitch();" class="btn btn-lg btn-secondary">Update</button>
+  </div>
+ <!--
   <div class="actions">
     <%= f.submit "Update" %>
   </div>
+-->
 <% end %>
 
 <h3>Cancel my account</h3>
@@ -51,3 +55,6 @@
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
 <%= link_to "Back", :back %>
+<%= javascript_tag do %>
+  storePlanType();
+<% end %>

@@ -26,6 +26,7 @@ class RegistrationsController < Devise::RegistrationsController
     else
       if(!current_user.admin? && !current_user.standard? && User.find(current_user).premium_plan == 0)
         current_user.standard!
+        Wiki.private_wiki(current_user).update_all private: 0
       end
       wikis_path
     end

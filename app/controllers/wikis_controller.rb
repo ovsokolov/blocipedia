@@ -4,7 +4,7 @@ class WikisController < ApplicationController
   # GET /wikis
   # GET /wikis.json
   def index
-    @wikis = Wiki.all
+    @wikis = Wiki.visible_wiki(current_user)
   end
 
   # GET /wikis/1
@@ -72,6 +72,6 @@ class WikisController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def wiki_params
-      params.fetch(:wiki, {}).permit(:title, :body)
+      params.fetch(:wiki, {}).permit(:title, :body, :private)
     end
 end

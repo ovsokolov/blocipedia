@@ -7,7 +7,7 @@ users = User.all
     user:   users.sample,
     title:  RandomData.random_sentence,
     body:   RandomData.random_paragraph,
-    private: false
+    private: 0
   )
 end
 
@@ -16,7 +16,7 @@ end
     user:   User.find(1),
     title:  RandomData.random_sentence,
     body:   RandomData.random_paragraph,
-    private: false
+    private: 0
   )
 end
 

@@ -15,3 +15,21 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap
+let planType = 0
+
+function checkPlanSwitch(){
+  if( !($('#user_premium_plan').is(":checked")) && planType == 1 ){
+    bootbox.confirm("Your private wikis will become public if you downgrade your account.<br> Would you like to continue?",
+            function(result){ if(result){$('#edit_user').submit();} });
+  }else{
+    $('#edit_user').submit();
+  }
+}
+
+function storePlanType(){
+  if($('#user_premium_plan').is(":checked")){
+    planType = 1;
+  }else{
+    planType = 0;
+  }
+}
