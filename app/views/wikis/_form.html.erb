@@ -18,6 +18,12 @@
     <%= f.label :body %>
     <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body" %>
   </div>
+  <div class="form-group">
+    <%= f.label "Markdown Preview" %>
+    <p>
+      <%= markdown(@wiki.body) %>
+    </p>
+  </div>
   <% if current_user.admin? || current_user.premium? %>
   <div class="form-group">
     <%= f.label "Private Wiki" %> <br />
