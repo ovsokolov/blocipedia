@@ -2,7 +2,6 @@
   <% if wiki.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(wiki.errors.count, "error") %> prohibited this wiki from being saved:</h2>
-
       <ul>
       <% wiki.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,28 +9,54 @@
       </ul>
     </div>
   <% end %>
-  <div class="form-group">
-    <%= f.label :title %>
-    <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
+  <div class="row">
+    <div class="col-md-9">
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control', placeholder: "Enter wiki title" %>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <% if current_user.admin? || current_user.premium? %>
+      <div class="form-group">
+        <%= f.label "Private Wiki" %> <br />
+        <%= f.check_box :private %> <br />
+      </div>
+      <% end %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.label :body %>
-    <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body" %>
+  <div class="row">
+    <div class="col-md-9">&nbsp;</div>
+    <div class="col-md-3">
+      <% if (@wiki.private == 1 && @wiki.user == current_user) %>
+        <%= link_to 'Collaborators', wiki_collaborators_path(@wiki), class: 'btn btn-success'  %>
+      <% end %>
+    </div>
   </div>
-  <div class="form-group">
-    <%= f.label "Markdown Preview" %>
-    <p>
-      <%= markdown(@wiki.body) %>
-    </p>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= f.label :body %>
+        <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter wiki body" %>
+      </div>
+    </div>
   </div>
-  <% if current_user.admin? || current_user.premium? %>
-  <div class="form-group">
-    <%= f.label "Private Wiki" %> <br />
-    <%= f.check_box :private %> <br />
+  <div class="rows">
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= f.label "Markdown Preview" %>
+        <p>
+          <%= markdown(@wiki.body) %>
+        </p>
+      </div>
+    </div>
   </div>
-  <% end %>
-  <div class="form-group">
-    <%= f.submit "Save", class: 'btn btn-success' %>
-    <%= link_to 'Cancel', wikis_path, class: 'btn btn-success'  %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <%= f.submit "Save", class: 'btn btn-success' %>
+        <%= link_to 'Cancel', wikis_path, class: 'btn btn-success'  %>
+      </div>
+    </div>
   </div>
 <% end %>

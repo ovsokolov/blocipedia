@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   has_many :wikis, dependent: :destroy
+  has_many :collaborators
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   after_initialize :init
@@ -11,6 +13,6 @@ class User < ApplicationRecord
   enum role: [:standard, :premium, :admin]
 
   def init
-    self.role ||= :standard 
+    self.role ||= :standard
   end
 end

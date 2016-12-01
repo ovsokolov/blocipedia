@@ -1,0 +1,26 @@
+<div class="row">
+  <div class="col-md-12">
+    <td>Wiki Collaborators</td>
+  </div>
+</div>
+<%= form_tag({controller: "wikis", action: "save_collaborators"}, method: "post") do %>
+<% @wiki_users.each do |user| %>
+<div class="row">
+  <div class="col-md-5">
+    <td><%= user.name %></td>
+  </div>
+  <div class="col-md-5">
+    <td><%= user.email %></td>
+  </div>
+  <div class="col-md-2">
+    <%= check_box_tag "collaborator[#{user.id}]", user.id, checked = @collaborators.include?(user) %>
+  </div>
+</div>
+<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <%= submit_tag "Save", class: "btn btn-success" %>
+    <td><%= link_to 'Cancel', edit_wiki_path(params[:wiki_id]), class: 'btn btn-success'  %></td>
+  </div>
+</div>
+<% end %>

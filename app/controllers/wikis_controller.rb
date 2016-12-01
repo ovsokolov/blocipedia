@@ -4,7 +4,8 @@ class WikisController < ApplicationController
   # GET /wikis
   # GET /wikis.json
   def index
-    @wikis = Wiki.visible_wiki(current_user)
+    #@wikis = Wiki.visible_wiki(current_user)
+    @wikis = policy_scope(Wiki)
   end
 
   # GET /wikis/1
@@ -62,6 +63,22 @@ class WikisController < ApplicationController
       flash[:notice] = "Wiki was successfully deleted."
       format.html { redirect_to action: "index" }
     end
+  end
+
+  def collaborators
+    @wiki_users = User.all
+    @collaborators = User.find(Wiki.find(params[:wiki_id]).collaborators.pluck(:user_id))
+  end
+
+  def save_collaborators
+    Collaborator.destroy_all(:wiki_id => params[:wiki_id])
+    params[:collaborator].each do |id, attr|
+      Collaborator.create!(
+        user_id:  id,
+        wiki_id:  params[:wiki_id]
+      )
+    end
+    redirect_to edit_wiki_path(params[:wiki_id])
   end
 
   private
