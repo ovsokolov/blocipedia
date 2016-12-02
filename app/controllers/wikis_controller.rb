@@ -67,7 +67,7 @@ class WikisController < ApplicationController
 
   def collaborators
     @wiki_users = User.all
-    @collaborators = User.find(Wiki.find(params[:wiki_id]).collaborators.pluck(:user_id))
+    @collaborators = Wiki.find(params[:wiki_id]).collaborator_users
   end
 
   def save_collaborators
